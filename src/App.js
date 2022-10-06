@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  //
+
+  const [todo, setTodo] = useState(["react 정복하기"]);
+  const [text, setText] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div className="text-div">
+        <input
+          onChange={(e) => {
+            setText(e.target.value);
+            console.log(e.target.value);
+          }}
+          value={text}
+        />
+        <button
+          onClick={() => {
+            let copy = [...todo];
+            copy.push(text);
+            setTodo(copy);
+            // console.log(setTodo);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          추가하기
+        </button>
+      </div>
+      <h1>Todo List</h1>
+      {todo.map(function (a, i) {
+        return <div className="div-box">{todo[i]}</div>;
+      })}
     </div>
   );
 }
